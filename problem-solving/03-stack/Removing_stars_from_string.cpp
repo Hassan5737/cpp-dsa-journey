@@ -1,27 +1,26 @@
 /*
 ==================================================
-Problem: Remove All Adjacent Duplicates In String
+Problem: Removing Stars From a String
 
 Platform: LeetCode
+Problem Number: 2390
 
-Difficulty: Easy
+Difficulty: Medium
 
 Topics:
 - Stack
 - Strings
+- Simulation
 
 Approach:
-1. Create a stack to build the resulting string.
-2. Traverse the input string character by character.
-3. If the stack is not empty and the current character
-   matches the character at the top of the stack, remove
-   the top character because they form an adjacent duplicate pair.
-4. Otherwise, push the current character onto the stack.
-5. After processing the entire string, extract the characters
-   from the stack into a result string.
-6. Since the stack returns characters in reverse order,
-   reverse the result string.
-7. Return the final string.
+1. Traverse the string from left to right.
+2. For every normal character, push it onto the stack.
+3. When encountering '*', pop the closest non-star character
+   from the stack.
+4. After processing the entire string, extract the remaining
+   characters from the stack.
+5. Reverse the result because stack extraction happens from
+   top to bottom.
 
 Time Complexity:
 O(n)
@@ -30,7 +29,7 @@ Space Complexity:
 O(n)
 
 Date:
-2026-08-11
+2026-08-12
 ==================================================
 */
 
@@ -41,17 +40,18 @@ Date:
 
 using namespace std;
 
+
 class Solution
 {
 public:
-    string removeDuplicates(string s)
+    string removeStars(string s)
     {
         string result;
         stack<char> st;
 
         for (char c : s)
         {
-            if (!st.empty() && c == st.top())
+            if (c == '*')
             {
                 st.pop();
             }
@@ -72,4 +72,3 @@ public:
         return result;
     }
 };
-
